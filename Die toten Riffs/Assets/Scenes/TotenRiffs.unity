@@ -1164,6 +1164,7 @@ GameObject:
   - component: {fileID: 650297559}
   - component: {fileID: 650297553}
   - component: {fileID: 650297555}
+  - component: {fileID: 650297564}
   m_Layer: 0
   m_Name: Water4Simple
   m_TagString: Untagged
@@ -1279,6 +1280,27 @@ MonoBehaviour:
   sharedMaterial: {fileID: 2100000, guid: 656fde119942645aa8e062e04c119aa1, type: 2}
   waterQuality: 2
   edgeBlend: 1
+--- !u!65 &650297564
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644789557}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 51.02138, y: 6.343751, z: 99.99719}
+  m_Center: {x: -0.5928421, y: -3.2131085, z: 0.031705555}
 --- !u!114 &650297565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3155,8 +3177,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248030671}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30821005, y: -0.18855211, z: -0.06204113, w: -0.9303793}
-  m_LocalPosition: {x: 30.507381, y: -10.046996, z: -25.215946}
+  m_LocalRotation: {x: 0.3731382, y: -0.10187919, z: -0.041064482, w: -0.9212504}
+  m_LocalPosition: {x: -40.735577, y: -54.49852, z: -53.69198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
