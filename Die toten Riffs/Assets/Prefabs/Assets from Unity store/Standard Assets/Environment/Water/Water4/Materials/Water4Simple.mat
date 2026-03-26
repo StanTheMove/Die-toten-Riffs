@@ -73,7 +73,7 @@ Material:
     m_Colors:
     - _AnimationDirection: {r: 2, g: 1, b: -1, a: 1}
     - _AnimationTiling: {r: 0.4, g: 0.39099997, b: 0.56, a: 0.7}
-    - _BaseColor: {r: 0.0023042706, g: 0.2829635, b: 0, a: 0.5058824}
+    - _BaseColor: {r: 0.0023042706, g: 0.2829632, b: 0, a: 0.5058824}
     - _BumpDirection: {r: 1, g: 30, b: 20, a: -20}
     - _BumpTiling: {r: 0.04, g: 0.04, b: 0.04, a: 0.08}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -87,9 +87,9 @@ Material:
     - _GSpeed: {r: 4, g: 2, b: 1, a: 1}
     - _GSteepness: {r: 3.0301306, g: 1, b: 1, a: 1}
     - _InvFadeParemeter: {r: 0.27508128, g: 0.08562102, b: 0.09414239, a: 0.48031002}
-    - _ReflectionColor: {r: 0.06850073, g: 0.34587327, b: 0.0690118, a: 0.47058824}
+    - _ReflectionColor: {r: 0.06850047, g: 0.34587294, b: 0.06901154, a: 0.47058824}
     - _RefractionFog: {r: 0.8681778, g: 0.8797176, b: 0.8880597, a: 1}
-    - _SpecularColor: {r: 0.5343736, g: 0.5471698, b: 0.400911, a: 1}
+    - _SpecularColor: {r: 0.5343736, g: 0.5471698, b: 0.4009108, a: 1}
     - _WorldLightDir: {r: -0.9847444, g: -0.17359075, b: -0.012044907, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
