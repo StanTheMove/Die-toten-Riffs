@@ -10,6 +10,8 @@ public class FilterScript : MonoBehaviour, Interactable
 
         Filter.GasMaskFilter++;
 
+        gameObject.SetActive(false);
+
     }
 
 }
