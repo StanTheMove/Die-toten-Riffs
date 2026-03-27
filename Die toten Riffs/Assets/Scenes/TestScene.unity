@@ -4748,6 +4748,7 @@ GameObject:
   - component: {fileID: 1698707463}
   - component: {fileID: 1698707467}
   - component: {fileID: 1698707466}
+  - component: {fileID: 1698707468}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -4863,9 +4864,9 @@ MonoBehaviour:
   walkSpeed: 6
   runSpeed: 12
   jumpPower: 7
-  gravity: 10
-  lookSpeed: 2
-  lookXLimit: 45
+  gravityScale: 20
+  acceleration: 10
+  deceleration: 10
   defaultHeight: 2
   crouchHeight: 1
   crouchSpeed: 3
@@ -4894,6 +4895,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1698707468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698707461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59931318f7ace88429b670284164d34d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enable: 1
+  _Amplitude: 0.002
+  _frequency: 10
+  _camera: {fileID: 1823846807}
+  _cameraHolder: {fileID: 1698707462}
 --- !u!43 &1733969963
 Mesh:
   m_ObjectHideFlags: 0
