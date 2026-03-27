@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public class FilterScript : MonoBehaviour
+public class FilterScript : MonoBehaviour, Interactable
 {
-    public GameObject Filter;
 
-    void OnTriggerEnter(Collider other)
+    public void Interact()
     {
-        Filter.SetActive(false);       
+
+        InventoryScript Filter = GetComponentInChildren<InventoryScript>();
+
+        Filter.GasMaskFilter++;
+
     }
 
 }
