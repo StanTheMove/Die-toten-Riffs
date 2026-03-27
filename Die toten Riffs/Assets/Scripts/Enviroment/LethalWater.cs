@@ -8,7 +8,9 @@ public class LethalWater : MonoBehaviour
     [SerializeField] private float shallowDepth = 1.2f;
     
     [SerializeField] private float drownTime = 3f;
-    [SerializeField] private float sinkForce = 15f;
+    
+    [SerializeField] private float waterDrag = 5f;
+    [SerializeField] private float gravityMultiplier = 0.2f;
     
     private BoxCollider waterCollider;
 
@@ -17,6 +19,7 @@ public class LethalWater : MonoBehaviour
         public IDamageable Damageable;
         public Transform Transform;
         public Rigidbody Rb;
+        public float DefaultDrag;
         public float DrownTimer;
         public float NextDamageTime;
     }
@@ -33,6 +36,13 @@ public class LethalWater : MonoBehaviour
     {
         if (other.TryGetComponent(out IDamageable damageable))
         {
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            float defDrag = 0f;
+
+            if (rb != null)
+            {
+                defDrag = rb.linearDamping;
+            }
             victims[other] = new WaterInfo
             {
                 Damageable = damageable,
@@ -52,7 +62,7 @@ public class LethalWater : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         float surfaceY = waterCollider.bounds.max.y;
 
@@ -60,21 +70,18 @@ public class LethalWater : MonoBehaviour
         {
             WaterInfo victim = kvp.Value;
             if (victim.Transform == null) continue;
+
+            if (victim.Rb != null)
+            {
+                Vector3 counterGravity = Physics.gravity * (1f - gravityMultiplier);
+                victim.Rb.AddForce(-counterGravity, ForceMode.Acceleration);
+            }
             
             float depth = surfaceY - victim.Transform.position.y;
 
             if (depth < shallowDepth)
             {
                 victim.DrownTimer += Time.deltaTime;
-
-                if (victim.Rb != null)
-                {
-                    victim.Rb.AddForce(Vector3.down * sinkForce, ForceMode.Acceleration);
-                }
-                else
-                {
-                    victim.Transform.position += Vector3.down * (sinkForce * 0.1f * Time.deltaTime);
-                }
 
                 if (victim.DrownTimer >= drownTime)
                 {
