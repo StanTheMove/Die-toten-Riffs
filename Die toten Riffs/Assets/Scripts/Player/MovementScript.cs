@@ -32,7 +32,7 @@ public class MovementScript : MonoBehaviour
 
     void Update()
     {
-        bool isCrouching = Input.GetKey(KeyCode.R) && canMove;
+        bool isCrouching = Input.GetKey(KeyCode.LeftControl) && canMove;
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isCrouching;
 
         float targetHeight = isCrouching ? crouchHeight : defaultHeight;
