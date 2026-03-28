@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -9,66 +7,58 @@ public class MovementScript : MonoBehaviour
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
     public float jumpPower = 7f;
-    public float gravity = 10f;
-    public float lookSpeed = 2f;
-    public float lookXLimit = 45f;
+    public float gravityScale = 20f;
+    public float acceleration = 10f;
+    public float deceleration = 10f;
     public float defaultHeight = 2f;
     public float crouchHeight = 1f;
     public float crouchSpeed = 3f;
 
-    private Vector3 moveDirection = Vector3.zero;
+    private Vector3 currentMoveVelocity = Vector3.zero;
+    private float verticalVelocity = 0f;
     private CharacterController characterController;
-
     private bool canMove = true;
+    private float currentWalkSpeed;
+    private float currentRunSpeed;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        currentWalkSpeed = walkSpeed;
+        currentRunSpeed = runSpeed;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     void Update()
     {
+        bool isCrouching = Input.GetKey(KeyCode.R) && canMove;
+        bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isCrouching;
+
+        float targetHeight = isCrouching ? crouchHeight : defaultHeight;
+        characterController.height = Mathf.Lerp(characterController.height, targetHeight, 10f * Time.deltaTime);
+
+        float speed = isCrouching ? crouchSpeed : (isRunning ? runSpeed : walkSpeed);
+
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
+        Vector3 targetVelocity = canMove
+            ? (forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal")) * speed
+            : Vector3.zero;
 
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
-        float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        float lerpFactor = (targetVelocity.magnitude > 0.1f ? acceleration : deceleration) * Time.deltaTime;
+        currentMoveVelocity = Vector3.Lerp(currentMoveVelocity, targetVelocity, lerpFactor);
 
-        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+        if (characterController.isGrounded)
         {
-            moveDirection.y = jumpPower;
+            if (verticalVelocity < 0f) verticalVelocity = -2f;
+            if (Input.GetButtonDown("Jump") && canMove)
+                verticalVelocity = jumpPower;
         }
-        else
-        {
-            moveDirection.y = movementDirectionY;
-        }
+        verticalVelocity -= gravityScale * Time.deltaTime;
 
-        if (!characterController.isGrounded)
-        {
-            moveDirection.y -= gravity * Time.deltaTime;
-        }
-
-        if (Input.GetKey(KeyCode.R) && canMove)
-        {
-            characterController.height = crouchHeight;
-            walkSpeed = crouchSpeed;
-            runSpeed = crouchSpeed;
-
-        }
-        else
-        {
-            characterController.height = defaultHeight;
-            walkSpeed = 6f;
-            runSpeed = 12f;
-        }
-
-        characterController.Move(moveDirection * Time.deltaTime);
-
-
+        Vector3 finalMove = currentMoveVelocity;
+        finalMove.y = verticalVelocity;
+        characterController.Move(finalMove * Time.deltaTime);
     }
 }
