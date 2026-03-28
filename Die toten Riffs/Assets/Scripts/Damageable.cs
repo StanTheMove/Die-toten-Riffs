@@ -1,1 +1,8 @@
-public interface IDamageable {void TakeDamage(float amount);}
+public interface IDamageable 
+{
+    public void TakeDamage(float Damage)
+    {
+
+    }
+
+}

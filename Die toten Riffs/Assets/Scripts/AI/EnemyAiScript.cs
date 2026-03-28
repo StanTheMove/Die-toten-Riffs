@@ -1,18 +1,27 @@
 using UnityEngine;
 using UnityEngine.AI;
-
 public class NavMeshEnemy : MonoBehaviour
 {
     public Transform player;
     public float detectionRange = 10f;
     public float attackRange = 2f;
     public float fovAngle = 90f;
-
+    public Transform[] patrolPoints;
+    public float waitAtPointTime = 2f;
+    private float waitTimer = 0f;
+    private bool isWaiting = false;
+    private int currentPatrolIndex = 0;
+    public float patrolSpeed = 2f;
+    public float chaseSpeed = 5f;
+    public float attackCooldown = 1.5f;
+    private float lastAttackTime = -Mathf.Infinity;
     private NavMeshAgent agent;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.stoppingDistance = attackRange;
+        GoToNextPatrolPoint();
     }
 
     void Update()
@@ -21,21 +30,28 @@ public class NavMeshEnemy : MonoBehaviour
 
         if (dist <= detectionRange && IsPlayerInFoV())
         {
-            agent.SetDestination(player.position);  // Automatically pathfinds!
+            agent.speed = chaseSpeed;
+            agent.SetDestination(player.position);
 
             if (dist <= attackRange)
             {
+
                 agent.isStopped = true;
+                agent.acceleration = 50f;
                 Attack();
+
             }
             else
             {
                 agent.isStopped = false;
+                agent.acceleration = 8f;
             }
         }
         else
         {
-            agent.isStopped = true; // Idle
+            agent.isStopped = false;
+            agent.acceleration = 8f;
+            HandlePatrol();
         }
     }
 
@@ -46,21 +62,56 @@ public class NavMeshEnemy : MonoBehaviour
 
         if (angleBetween < fovAngle / 2f)
         {
-            // Optional: Raycast to check if a wall is blocking line of sight
             if (Physics.Raycast(transform.position + Vector3.up, directionToPlayer, out RaycastHit hit, detectionRange))
             {
                 if (hit.transform == player)
-                    return true; // Clear line of sight
+                    return true;
                 else
-                    return false; // Wall is blocking
+                    return false;
             }
         }
-
         return false;
+    }
+
+    void HandlePatrol()
+    {
+        agent.speed = patrolSpeed;
+
+        if (patrolPoints.Length == 0) return;
+
+        if (isWaiting)
+        {
+            waitTimer += Time.deltaTime;
+            if (waitTimer >= waitAtPointTime)
+            {
+                isWaiting = false;
+                waitTimer = 0f;
+                GoToNextPatrolPoint();
+            }
+            return;
+        }
+
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            isWaiting = true;
+        }
+    }
+
+    void GoToNextPatrolPoint()
+    {
+        if (patrolPoints.Length == 0) return;
+        agent.SetDestination(patrolPoints[currentPatrolIndex].position);
+        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
 
     void Attack()
     {
-        Debug.Log("NavMesh Enemy Attacks!");
+
+        if (Time.time - lastAttackTime < attackCooldown) return;
+
+        lastAttackTime = Time.time;
+        HealthScript PPlayer = GameObject.Find("Player").GetComponent<HealthScript>();
+        PPlayer.TakeDamage(5f);
+
     }
 }
