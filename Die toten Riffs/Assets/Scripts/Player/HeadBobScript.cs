@@ -6,12 +6,8 @@ public class Headbob : MonoBehaviour
 {
     [Header("Configuration")]
     [SerializeField] private bool _enable = true;
-
-    [SerializeField, Range(0, 0.1f)] private float _Amplitude = 0.015f; 
-    [SerializeField, Range(0, 30)] private float _frequency = 10.0f;
-
-    [SerializeField] private Transform _camera = null;
-    [SerializeField] private Transform _cameraHolder = null;
+    [SerializeField, Range(0, 0.1f)] private float _Amplitude = 0.015f; [SerializeField, Range(0, 30)] private float _frequency = 10.0f;
+    [SerializeField] private Transform _camera = null; [SerializeField] private Transform _cameraHolder = null;
 
     private float _toggleSpeed = 3.0f;
     private Vector3 _startPos;
@@ -32,10 +28,9 @@ public class Headbob : MonoBehaviour
     }
     private Vector3 FootStepMotion()
     {
-        float speed = new Vector3(_controller.velocity.x, 0, _controller.velocity.z).magnitude;
         Vector3 pos = Vector3.zero;
-        pos.y += Mathf.Sin(Time.time * _frequency * speed) * _Amplitude;
-        pos.x += Mathf.Cos(Time.time * _frequency / 2 * speed) * _Amplitude * 2;
+        pos.y += Mathf.Sin(Time.time * _frequency) * _Amplitude;
+        pos.x += Mathf.Cos(Time.time * _frequency / 2) * _Amplitude * 2;
         return pos;
     }
     private void CheckMotion()

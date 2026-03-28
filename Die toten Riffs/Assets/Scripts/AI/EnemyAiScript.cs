@@ -1,24 +1,18 @@
 using UnityEngine;
 using UnityEngine.AI;
+
 public class NavMeshEnemy : MonoBehaviour
 {
     public Transform player;
     public float detectionRange = 10f;
     public float attackRange = 2f;
     public float fovAngle = 90f;
-    public Transform[] patrolPoints;
-    public float waitAtPointTime = 2f;
-    private float waitTimer = 0f;
-    private bool isWaiting = false;
-    private int currentPatrolIndex = 0;
-    public float patrolSpeed = 2f;
-    public float chaseSpeed = 5f;
+
     private NavMeshAgent agent;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        GoToNextPatrolPoint();
     }
 
     void Update()
@@ -27,8 +21,7 @@ public class NavMeshEnemy : MonoBehaviour
 
         if (dist <= detectionRange && IsPlayerInFoV())
         {
-            agent.speed = chaseSpeed;
-            agent.SetDestination(player.position);
+            agent.SetDestination(player.position);  // Automatically pathfinds!
 
             if (dist <= attackRange)
             {
@@ -42,8 +35,7 @@ public class NavMeshEnemy : MonoBehaviour
         }
         else
         {
-            agent.isStopped = false;
-            HandlePatrol();
+            agent.isStopped = true; // Idle
         }
     }
 
@@ -54,50 +46,21 @@ public class NavMeshEnemy : MonoBehaviour
 
         if (angleBetween < fovAngle / 2f)
         {
+            // Optional: Raycast to check if a wall is blocking line of sight
             if (Physics.Raycast(transform.position + Vector3.up, directionToPlayer, out RaycastHit hit, detectionRange))
             {
                 if (hit.transform == player)
-                    return true;
+                    return true; // Clear line of sight
                 else
-                    return false;
+                    return false; // Wall is blocking
             }
         }
+
         return false;
-    }
-
-    void HandlePatrol()
-    {
-        agent.speed = patrolSpeed;
-
-        if (patrolPoints.Length == 0) return;
-
-        if (isWaiting)
-        {
-            waitTimer += Time.deltaTime;
-            if (waitTimer >= waitAtPointTime)
-            {
-                isWaiting = false;
-                waitTimer = 0f;
-                GoToNextPatrolPoint();
-            }
-            return;
-        }
-
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-        {
-            isWaiting = true;
-        }
-    }
-
-    void GoToNextPatrolPoint()
-    {
-        if (patrolPoints.Length == 0) return;
-        agent.SetDestination(patrolPoints[currentPatrolIndex].position);
-        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
 
     void Attack()
     {
-        Debug.Log("Attack");
+        Debug.Log("NavMesh Enemy Attacks!");
     }
 }
