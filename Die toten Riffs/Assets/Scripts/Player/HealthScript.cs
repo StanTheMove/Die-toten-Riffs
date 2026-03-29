@@ -60,6 +60,7 @@ public class HealthScript : MonoBehaviour, IDamageable
         StartCoroutine(ShakeCoroutine(0.3f, Damage * 0.05f));
         if (Health <= 0)
         {
+            Debug.Log(Health);
             IsDead = true;
         }
     }

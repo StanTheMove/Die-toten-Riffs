@@ -168,7 +168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7570529f7218a4a9378f0477472770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Flashlight: {fileID: 6463850651517096396}
+  FlashlightOnSFX: {fileID: 8300000, guid: 5b069b41167c8594fb7355b6586a3d5f, type: 3}
+  FlashlightOffSFX: {fileID: 8300000, guid: 110ae115795c9e84eb42287f7b169f66, type: 3}
+  flashlightObject: {fileID: 6463850651517096396}
 --- !u!114 &5459665964137306528
 MonoBehaviour:
   m_ObjectHideFlags: 0
