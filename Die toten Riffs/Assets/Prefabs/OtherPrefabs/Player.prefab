@@ -210,8 +210,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5233185302452205514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.344}
+  m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 55848490326685602}
@@ -220,8 +220,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 1602, y: 850}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5287200378325769597
 Canvas:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ Canvas:
   m_GameObject: {fileID: 5233185302452205514}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7935362347534543439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,7 +311,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6318901201498328621}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.000029802}
   m_LocalScale: {x: 9.5, y: 4.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -319,8 +319,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0.0099487, y: -0.0049133}
+  m_SizeDelta: {x: 168.63, y: 188.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3260560610097499317
 CanvasRenderer:
@@ -473,9 +473,10 @@ GameObject:
   - component: {fileID: 4362287103099740762}
   - component: {fileID: 885444370485599983}
   - component: {fileID: 8344371549863227222}
+  - component: {fileID: 8672139682789571716}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -611,7 +612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 6462493291832448564}
   walkSpeed: 6
-  runSpeed: 12
+  runSpeed: 9
   jumpPower: 7
   gravityScale: 20
   acceleration: 10
@@ -619,6 +620,7 @@ MonoBehaviour:
   defaultHeight: 2
   crouchHeight: 1
   crouchSpeed: 3
+  currentMoveVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &885444370485599983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,7 +637,7 @@ MonoBehaviour:
   _Amplitude: 0.002
   _frequency: 2
   _camera: {fileID: 4363135422443784020}
-  _cameraHolder: {fileID: 9074296204442712694}
+  _cameraHolder: {fileID: 4363135422443784020}
 --- !u!54 &8344371549863227222
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -659,10 +661,29 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8672139682789571716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7098397953574428356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c246a41f003d1dd4b8dec20ed5f860e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FootstepsSFX:
+  - {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
+  - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
+  - {fileID: 8300000, guid: 5a9383dda6cabc047b7a297602e93eb4, type: 3}
+  - {fileID: 8300000, guid: e9714160ce34f2b4ab63ff8c27bd68e1, type: 3}
+  JumpSFX: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
+  LandSFX: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
 --- !u!1 &8829494460452776411
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,7 +730,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74f4d3d128795d945bd681a8ccbb9040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
   damageOverlay: {fileID: 3910466621800231201}
   _Amplitude: 0.003
   _frequency: 30
@@ -727,4 +747,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7cc27c54ebdaad4c9c45cf9191531a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GasMaskFilter: 0

@@ -6,6 +6,7 @@ public class PauseMenuScript : MonoBehaviour
     public GameObject DeathScrean;
     public static bool IsPaused = false;
     public static PauseMenuScript Instance;
+    public AudioClip ClickSound;
 
     void Awake()
     {
@@ -57,6 +58,12 @@ public class PauseMenuScript : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenuScene");
     }
+
+    public void PlayClickSoundPauseMenu()
+    {
+        AudioManagerScript.instance.PlaySFX(ClickSound);
+    }
+
     public static void Revive()
     {
         InventoryScript.AliveCoral = CheckpointScript.CurrentAliveCoral;

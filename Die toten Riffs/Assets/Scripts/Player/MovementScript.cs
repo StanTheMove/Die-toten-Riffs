@@ -14,12 +14,14 @@ public class MovementScript : MonoBehaviour
     public float crouchHeight = 1f;
     public float crouchSpeed = 3f;
 
-    private Vector3 currentMoveVelocity = Vector3.zero;
+    public Vector3 currentMoveVelocity = Vector3.zero;
     private float verticalVelocity = 0f;
     private CharacterController characterController;
     private bool canMove = true;
     private float currentWalkSpeed;
     private float currentRunSpeed;
+
+    public bool isGrounded => characterController.isGrounded;
 
     void Start()
     {
@@ -32,7 +34,7 @@ public class MovementScript : MonoBehaviour
 
     void Update()
     {
-        bool isCrouching = Input.GetKey(KeyCode.R) && canMove;
+        bool isCrouching = Input.GetKey(KeyCode.LeftControl) && canMove;
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isCrouching;
 
         float targetHeight = isCrouching ? crouchHeight : defaultHeight;

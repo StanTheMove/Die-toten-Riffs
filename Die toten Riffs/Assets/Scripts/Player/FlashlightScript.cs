@@ -2,32 +2,27 @@ using UnityEngine;
 
 public class FlashlightScript : MonoBehaviour
 {
+    public AudioClip FlashlightOnSFX;
+    public AudioClip FlashlightOffSFX;
+    public GameObject flashlightObject;
 
-    public GameObject Flashlight;
-    bool FlashlightActive = false;
-
-    void Start()
+    private bool isFlashlightOn = false;
+void Start()
     {
-        Flashlight.gameObject.SetActive(false);
+        flashlightObject.gameObject.SetActive(false);
     }
 
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (FlashlightActive == true)
-            {
-                Flashlight.gameObject.SetActive(false);
-                FlashlightActive = false;
-            }
-            else if (FlashlightActive == false)
-            {
-                Flashlight.gameObject.SetActive(true);
-                FlashlightActive = true;
-            }
+            isFlashlightOn = !isFlashlightOn;
+            flashlightObject.SetActive(isFlashlightOn);
+
+            if (isFlashlightOn)
+                AudioManagerScript.instance.PlaySFX(FlashlightOnSFX);
+            else
+                AudioManagerScript.instance.PlaySFX(FlashlightOffSFX);
         }
-
     }
-
 }
