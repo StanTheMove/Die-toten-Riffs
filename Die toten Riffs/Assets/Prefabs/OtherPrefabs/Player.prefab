@@ -457,6 +457,7 @@ GameObject:
   - component: {fileID: 2500991354252749354}
   - component: {fileID: 4362287103099740762}
   - component: {fileID: 885444370485599983}
+  - component: {fileID: 8344371549863227222}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -620,6 +621,33 @@ MonoBehaviour:
   _frequency: 10
   _camera: {fileID: 4363135422443784020}
   _cameraHolder: {fileID: 9074296204442712694}
+--- !u!54 &8344371549863227222
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7098397953574428356}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8829494460452776411
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,3 +695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   damageOverlay: {fileID: 3910466621800231201}
+  _Amplitude: 0.015
+  _frequency: 10
+  _camera: {fileID: 0}
+  _cameraHolder: {fileID: 0}
