@@ -1,26 +1,67 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-namespace UI
+
+[RequireComponent(typeof(Camera))]
+public class UnderwaterEffect : MonoBehaviour
 {
-    public class UnderWaterEffect : MonoBehaviour
+    [SerializeField] private Color underwaterColor = new Color(0.1f, 0.25f, 0.15f, 1f);
+    [SerializeField] private float underwaterFogDensity = 0.15f;
+
+    private Camera cam;
+    
+    private bool defaultFogState;
+    private Color defaultFogColor;
+    private float defaultFogDensity;
+    private Color defaultCamColor;
+    private CameraClearFlags defaultClearFlags;
+
+    private void Start()
     {
-        private Image waterOverlay;
+        cam = GetComponent<Camera>();
+        
+        defaultFogState = RenderSettings.fog;
+        defaultFogColor = RenderSettings.fogColor;
+        defaultFogDensity = RenderSettings.fogDensity;
+        
+        defaultCamColor = cam.backgroundColor;
+        defaultClearFlags = cam.clearFlags;
+    }
 
-        private void Start()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Water"))
         {
-            if (waterOverlay != null) waterOverlay.enabled = false;
+            SetUnderwater(true);
         }
+    }
 
-        private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Water"))
         {
-            if(other.CompareTag("Water") && waterOverlay != null)
-                waterOverlay.enabled = true;
+            SetUnderwater(false);
         }
+    }
 
-        private void OnTriggerExit(Collider other)
+    private void SetUnderwater(bool isUnderwater)
+    {
+        if (isUnderwater)
         {
-            if(other.CompareTag("Water") && waterOverlay != null)
-                waterOverlay.enabled = false;
+            RenderSettings.fog = true;
+            RenderSettings.fogColor = underwaterColor;
+            RenderSettings.fogDensity = underwaterFogDensity;
+            RenderSettings.fogMode = FogMode.ExponentialSquared; 
+
+            cam.clearFlags = CameraClearFlags.SolidColor; 
+            cam.backgroundColor = underwaterColor;
+        }
+        else
+        {
+            RenderSettings.fog = defaultFogState;
+            RenderSettings.fogColor = defaultFogColor;
+            RenderSettings.fogDensity = defaultFogDensity;
+
+            cam.clearFlags = defaultClearFlags;
+            cam.backgroundColor = defaultCamColor;
         }
     }
 }

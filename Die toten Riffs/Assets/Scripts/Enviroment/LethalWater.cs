@@ -5,14 +5,14 @@ using UnityEngine;
 public class LethalWater : MonoBehaviour
 {
     [SerializeField] private float damagePerSec = 5f;
-    [SerializeField] private float shallowDepth = 1.2f; // Межа між мілиною і глибиною
+    [SerializeField] private float shallowDepth = 1.2f; 
     
     [SerializeField] private float drownTime = 3f;
     
-    [SerializeField] private float waterDrag = 5f; // Опір води
+    [SerializeField] private float waterDrag = 5f; 
     [SerializeField] private float gravityMultiplier = 0.2f;
     
-    private Collider waterCollider; // Тепер працює з будь-якою формою
+    private Collider waterCollider; 
 
     private class WaterInfo
     {
@@ -42,8 +42,8 @@ public class LethalWater : MonoBehaviour
 
             if (rb != null)
             {
-                defDrag = rb.linearDamping; // Запам'ятовуємо нормальний опір повітря
-                rb.linearDamping = waterDrag; // Робимо рух важким у воді
+                defDrag = rb.linearDamping;
+                rb.linearDamping = waterDrag; 
             }
             
             victims[other] = new WaterInfo
@@ -51,7 +51,7 @@ public class LethalWater : MonoBehaviour
                 Damageable = damageable,
                 Transform = other.transform,
                 Rb = rb,
-                DefaultDrag = defDrag, // Зберігаємо нормальний опір
+                DefaultDrag = defDrag,
                 DrownTimer = 0f,
                 NextDamageTime = Time.time
             };
@@ -64,7 +64,6 @@ public class LethalWater : MonoBehaviour
         {
             if (victim.Rb != null)
             {
-                // ПОВЕРТАЄМО нормальний рух, коли гравець виходить з води
                 victim.Rb.linearDamping = victim.DefaultDrag; 
             }
             victims.Remove(other);
@@ -82,26 +81,23 @@ public class LethalWater : MonoBehaviour
 
             if (victim.Rb != null)
             {
-                // Виштовхуємо наверх, щоб падіння було повільним
                 Vector3 counterGravity = Physics.gravity * (1f - gravityMultiplier);
                 victim.Rb.AddForce(-counterGravity, ForceMode.Acceleration);
             }
             
             float depth = surfaceY - victim.Transform.position.y;
-
-            // ВИПРАВЛЕНО: Якщо глибина БІЛЬША за дозволену, починаємо топити
+            
             if (depth > shallowDepth) 
             {
                 victim.DrownTimer += Time.fixedDeltaTime;
 
                 if (victim.DrownTimer >= drownTime)
                 {
-                    victim.Damageable.TakeDamage(9999f); // Смерть
+                    victim.Damageable.TakeDamage(9999f);
                 }
             }
             else
             {
-                // На мілині обнуляємо час утоплення і просто завдаємо шкоди
                 victim.DrownTimer = 0f;
 
                 if (Time.time >= victim.NextDamageTime)
