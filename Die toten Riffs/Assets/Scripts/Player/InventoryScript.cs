@@ -1,23 +1,7 @@
 using UnityEngine;
-
 public class InventoryScript : MonoBehaviour
 {
-
-    public int GasMaskFilter = 0;
-
-    void Update()
-    {
-        
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-
-            if (GasMaskFilter > 0) 
-            {
-                GasMaskFilter--;
-            }
-
-        }
-
-    }
-
+    public static int AliveCoral = 0;
+    public static int InstructionForGenerator = 0;
+    public static int Gas = 0;
 }

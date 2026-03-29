@@ -8,8 +8,6 @@ public class FilterScript : MonoBehaviour, Interactable
 
         InventoryScript Filter = FindFirstObjectByType<InventoryScript>();
 
-        Filter.GasMaskFilter++;
-
         Debug.Log("Filter");
 
         gameObject.SetActive(false);
