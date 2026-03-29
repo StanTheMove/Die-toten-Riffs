@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8910762592579350314}
   - component: {fileID: 4485650834891250981}
   - component: {fileID: 2928367766660637302}
+  - component: {fileID: 5459665964137306528}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -168,6 +169,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Flashlight: {fileID: 6463850651517096396}
+--- !u!114 &5459665964137306528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4682349901975348186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6108e93bb91c90a4d8743de1e7770527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractionSource: {fileID: 4363135422443784020}
+  IntractionRange: 5
 --- !u!1 &5233185302452205514
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enable: 1
   _Amplitude: 0.002
-  _frequency: 10
+  _frequency: 2
   _camera: {fileID: 4363135422443784020}
   _cameraHolder: {fileID: 9074296204442712694}
 --- !u!54 &8344371549863227222
@@ -658,6 +673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1355640660735111481}
   - component: {fileID: 2726124506138417499}
+  - component: {fileID: 6973044092053641111}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -695,7 +711,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   damageOverlay: {fileID: 3910466621800231201}
-  _Amplitude: 0.015
-  _frequency: 10
-  _camera: {fileID: 0}
-  _cameraHolder: {fileID: 0}
+  _Amplitude: 0.003
+  _frequency: 30
+  _camera: {fileID: 4363135422443784020}
+  _cameraHolder: {fileID: 4363135422443784020}
+--- !u!114 &6973044092053641111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829494460452776411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7cc27c54ebdaad4c9c45cf9191531a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GasMaskFilter: 0

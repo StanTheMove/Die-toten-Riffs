@@ -6,9 +6,11 @@ public class FilterScript : MonoBehaviour, Interactable
     public void Interact()
     {
 
-        InventoryScript Filter = GetComponentInChildren<InventoryScript>();
+        InventoryScript Filter = FindFirstObjectByType<InventoryScript>();
 
         Filter.GasMaskFilter++;
+
+        Debug.Log("Filter");
 
         gameObject.SetActive(false);
 

@@ -2,22 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-interface Interactable
-{
-    public void Interact();
-
-}
-
 public class InterationScript : MonoBehaviour
 {
 
     public Transform InteractionSource;
     public float IntractionRange;
 
-    void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -33,4 +23,10 @@ public class InterationScript : MonoBehaviour
             }
         }
     }
+}
+
+interface Interactable
+{
+    public void Interact();
+
 }
