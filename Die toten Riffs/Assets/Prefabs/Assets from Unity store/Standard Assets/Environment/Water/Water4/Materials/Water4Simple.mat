@@ -73,7 +73,7 @@ Material:
     m_Colors:
     - _AnimationDirection: {r: 2, g: 1, b: -1, a: 1}
     - _AnimationTiling: {r: 0.4, g: 0.39099997, b: 0.56, a: 0.7}
-    - _BaseColor: {r: 0.14188313, g: 0.22010276, b: 0.15208584, a: 0.5058824}
+    - _BaseColor: {r: 0.14185339, g: 0.22007138, b: 0.1520561, a: 0.5058824}
     - _BumpDirection: {r: 1, g: 30, b: 20, a: -20}
     - _BumpTiling: {r: 0.04, g: 0.04, b: 0.04, a: 0.08}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -87,7 +87,7 @@ Material:
     - _GSpeed: {r: 3, g: 3, b: 3, a: 3}
     - _GSteepness: {r: 3, g: 0.3, b: 0.3, a: 0.3}
     - _InvFadeParemeter: {r: 2.53, g: 0.08562102, b: 0.09414239, a: 0.9}
-    - _ReflectionColor: {r: 0.46540874, g: 0.41050383, b: 0.24431437, a: 0.47058824}
+    - _ReflectionColor: {r: 0.46540874, g: 0.41047245, b: 0.24428299, a: 0.47058824}
     - _RefractionFog: {r: 0.8681778, g: 0.8797176, b: 0.8880597, a: 1}
     - _SpecularColor: {r: 0, g: 0, b: 0, a: 1}
     - _WorldLightDir: {r: -0.9847444, g: -0.17359075, b: -0.012044907, a: 0}
