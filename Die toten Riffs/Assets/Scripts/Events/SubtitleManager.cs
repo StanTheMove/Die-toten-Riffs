@@ -4,6 +4,7 @@ using System.Collections;
 
 public class SubtitleManager : MonoBehaviour
 {
+
     public static SubtitleManager Instance { get; private set; }
 
     [SerializeField] private TextMeshProUGUI subtitleText;
