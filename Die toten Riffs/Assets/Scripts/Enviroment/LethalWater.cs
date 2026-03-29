@@ -42,6 +42,7 @@ public class LethalWater : MonoBehaviour
             if (rb != null)
             {
                 defDrag = rb.linearDamping;
+                rb.linearDamping = waterDrag;
             }
             victims[other] = new WaterInfo
             {
@@ -81,7 +82,7 @@ public class LethalWater : MonoBehaviour
 
             if (depth < shallowDepth)
             {
-                victim.DrownTimer += Time.deltaTime;
+                victim.DrownTimer += Time.fixedDeltaTime;
 
                 if (victim.DrownTimer >= drownTime)
                 {
