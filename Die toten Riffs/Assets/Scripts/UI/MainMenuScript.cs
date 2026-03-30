@@ -8,6 +8,8 @@ public class MainMenuScript : MonoBehaviour
 
     public void PlayGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         SceneManager.LoadScene("TotenRiffs");
     }
 

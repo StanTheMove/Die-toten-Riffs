@@ -1,19 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
-
 [RequireComponent(typeof(Collider))]
 public class LethalWater : MonoBehaviour
 {
     [SerializeField] private float damagePerSec = 5f;
-    [SerializeField] private float shallowDepth = 1.2f; 
-    
+    [SerializeField] private float shallowDepth = 1.2f;
     [SerializeField] private float drownTime = 3f;
-    
-    [SerializeField] private float waterDrag = 5f; 
+    [SerializeField] private float waterDrag = 5f;
     [SerializeField] private float gravityMultiplier = 0.2f;
-    
-    private Collider waterCollider; 
 
+    private Collider waterCollider;
     private class WaterInfo
     {
         public IDamageable Damageable;
@@ -23,8 +19,8 @@ public class LethalWater : MonoBehaviour
         public float DrownTimer;
         public float NextDamageTime;
     }
-    
-    private Dictionary<Collider, WaterInfo> victims = new Dictionary<Collider, WaterInfo>();
+
+    private Dictionary<GameObject, WaterInfo> victims = new Dictionary<GameObject, WaterInfo>();
 
     private void Awake()
     {
@@ -34,22 +30,24 @@ public class LethalWater : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        GameObject root = other.transform.root.gameObject;
+        if (victims.ContainsKey(root)) return;
+
         IDamageable damageable = other.GetComponentInParent<IDamageable>();
         if (damageable != null)
         {
-            Rigidbody rb = other.GetComponent<Rigidbody>();
+            Rigidbody rb = other.GetComponentInParent<Rigidbody>();
             float defDrag = 0f;
-
             if (rb != null)
             {
                 defDrag = rb.linearDamping;
-                rb.linearDamping = waterDrag; 
+                rb.linearDamping = waterDrag;
             }
-            
-            victims[other] = new WaterInfo
+
+            victims[root] = new WaterInfo
             {
                 Damageable = damageable,
-                Transform = other.transform,
+                Transform = other.transform.root,
                 Rb = rb,
                 DefaultDrag = defDrag,
                 DrownTimer = 0f,
@@ -60,37 +58,46 @@ public class LethalWater : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (victims.TryGetValue(other, out WaterInfo victim))
+        GameObject root = other.transform.root.gameObject;
+        if (victims.TryGetValue(root, out WaterInfo victim))
         {
-            if (victim.Rb != null)
+            bool anyStillInside = false;
+            foreach (Collider col in root.GetComponentsInChildren<Collider>())
             {
-                victim.Rb.linearDamping = victim.DefaultDrag; 
+                if (col.bounds.Intersects(waterCollider.bounds))
+                {
+                    anyStillInside = true;
+                    break;
+                }
             }
-            victims.Remove(other);
+
+            if (!anyStillInside)
+            {
+                if (victim.Rb != null)
+                    victim.Rb.linearDamping = victim.DefaultDrag;
+                victims.Remove(root);
+            }
         }
     }
 
     private void FixedUpdate()
     {
         float surfaceY = waterCollider.bounds.max.y;
-
         foreach (var kvp in victims)
         {
             WaterInfo victim = kvp.Value;
             if (victim.Transform == null) continue;
-
             if (victim.Rb != null)
             {
                 Vector3 counterGravity = Physics.gravity * (1f - gravityMultiplier);
                 victim.Rb.AddForce(-counterGravity, ForceMode.Acceleration);
             }
-            
+
             float depth = surfaceY - victim.Transform.position.y;
-            
-            if (depth > shallowDepth) 
+
+            if (depth > shallowDepth)
             {
                 victim.DrownTimer += Time.fixedDeltaTime;
-
                 if (victim.DrownTimer >= drownTime)
                 {
                     victim.Damageable.TakeDamage(9999f);
@@ -99,11 +106,10 @@ public class LethalWater : MonoBehaviour
             else
             {
                 victim.DrownTimer = 0f;
-
                 if (Time.time >= victim.NextDamageTime)
                 {
                     victim.Damageable.TakeDamage(damagePerSec);
-                    victim.NextDamageTime = Time.time + 1f;  
+                    victim.NextDamageTime = Time.time + 1f;
                 }
             }
         }
