@@ -13,12 +13,21 @@ public class NoteViewer : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        notePanel.SetActive(false); 
+        if (notePanel != null) 
+        {
+            notePanel.SetActive(false); 
+        }
+        Time.timeScale = 1f; 
     }
 
- 
     public void ShowNote(string text)
     {
+        if (notePanel == null || noteText == null)
+        {
+            Debug.LogError("Помилка! Панель або Текст не підключені в Інспекторі (NoteViewer)!");
+            return;
+        }
+
         noteText.text = text;
         notePanel.SetActive(true);
         isOpen = true;
@@ -27,7 +36,7 @@ public class NoteViewer : MonoBehaviour
 
     private void Update()
     {
-        if (isOpen && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)))
+        if (isOpen && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab)))
         {
             notePanel.SetActive(false);
             isOpen = false;
