@@ -7,6 +7,10 @@ public class PauseMenuScript : MonoBehaviour
     public static bool IsPaused = false;
     public static PauseMenuScript Instance;
     public AudioClip ClickSound;
+    public GameObject Coral;
+    public GameObject Battery;
+    public GameObject Instructions;
+
 
     void Awake()
     {
@@ -66,6 +70,10 @@ public class PauseMenuScript : MonoBehaviour
 
     public static void Revive()
     {
+        int coralBefore = InventoryScript.AliveCoral;
+        int instructionsBefore = InventoryScript.InstructionForGenerator;
+        int gasBefore = InventoryScript.Gas;
+
         InventoryScript.AliveCoral = CheckpointScript.CurrentAliveCoral;
         InventoryScript.InstructionForGenerator = CheckpointScript.CurrentInstructionForGenerator;
         InventoryScript.Gas = CheckpointScript.CurrentGas;
@@ -74,7 +82,14 @@ public class PauseMenuScript : MonoBehaviour
         Instance.DeathScrean.SetActive(false);
         Time.timeScale = 1f;
         IsPaused = false;
-        Debug.Log("Teleporting to: " + CheckpointScript.SpawnPosition + " | Player at: " + CheckpointScript.Pllayer.position);
+
+        if (coralBefore > CheckpointScript.CurrentAliveCoral)
+            Instance.Coral.SetActive(true);
+        if (instructionsBefore > CheckpointScript.CurrentInstructionForGenerator)
+            Instance.Instructions.SetActive(true);
+        if (gasBefore > CheckpointScript.CurrentGas)
+            Instance.Battery.SetActive(true);
+
         CharacterController cc = CheckpointScript.Pllayer.GetComponent<CharacterController>();
         if (cc != null)
         {
@@ -86,6 +101,5 @@ public class PauseMenuScript : MonoBehaviour
         {
             CheckpointScript.Pllayer.position = CheckpointScript.SpawnPosition;
         }
-        CheckpointScript.Pllayer.position = CheckpointScript.SpawnPosition;
     }
 }

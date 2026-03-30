@@ -11,6 +11,7 @@ public class HealthScript : MonoBehaviour, IDamageable
     [SerializeField] private Transform _camera = null;
     [SerializeField] private Transform _cameraHolder = null;
     public static bool IsDead = false;
+    public AudioClip DamageSFX;
     private Vector3 _startPos;
 
     private void Awake()
@@ -58,9 +59,9 @@ public class HealthScript : MonoBehaviour, IDamageable
         StopAllCoroutines();
         StartCoroutine(FlashRed());
         StartCoroutine(ShakeCoroutine(0.3f, Damage * 0.05f));
+        AudioManagerScript.instance.PlaySFX(DamageSFX);
         if (Health <= 0)
         {
-            Debug.Log(Health);
             IsDead = true;
         }
     }
