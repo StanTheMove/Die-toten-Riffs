@@ -2179,8 +2179,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93934021}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.1149597, y: -0.55577147, z: 0.0776742, w: -0.8196763}
-  m_LocalPosition: {x: -104.261406, y: 0.7331295, z: 12.327639}
+  m_LocalRotation: {x: -0.08673544, y: -0.5428534, z: -0.08053, w: 0.83144575}
+  m_LocalPosition: {x: -93.459076, y: 3.0731907, z: 15.625804}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14380,9 +14380,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bd76fdb5e578ef4418d2ae7664a538c0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1920752351}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bd76fdb5e578ef4418d2ae7664a538c0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1920752355}
   m_SourcePrefab: {fileID: 100100000, guid: bd76fdb5e578ef4418d2ae7664a538c0, type: 3}
 --- !u!1 &594736106
 GameObject:
@@ -16582,11 +16579,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 885444370485599983, guid: 20e6ea6a086cf6d4c8b703a7ed1fd96d, type: 3}
       propertyPath: _Amplitude
-      value: 0.004
+      value: 0.003
       objectReference: {fileID: 0}
     - target: {fileID: 885444370485599983, guid: 20e6ea6a086cf6d4c8b703a7ed1fd96d, type: 3}
       propertyPath: _frequency
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1355640660735111481, guid: 20e6ea6a086cf6d4c8b703a7ed1fd96d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16790,7 +16787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sha: {fileID: 4800000, guid: 99d80d0fdb7c6724c89e77d81bbc026a, type: 3}
-  mat: {fileID: 0}
+  mat: {fileID: 1515907457}
   flatLut: {fileID: 2800000, guid: ad6e386de0e0fb14096d245400d241d3, type: 3}
   bayerTexture: {fileID: 2800000, guid: eac7505667530464e91debe0b4a8492b, type: 3}
   ColorBleed: 0
@@ -17437,9 +17434,9 @@ MonoBehaviour:
   PauseMenu: {fileID: 4823698152493670475}
   DeathScrean: {fileID: 4785891341776588635}
   ClickSound: {fileID: 8300000, guid: 34fbd70927ed79b43871c839cb3ba462, type: 3}
-  Coral: {fileID: 0}
-  Battery: {fileID: 0}
-  Instructions: {fileID: 0}
+  Coral: {fileID: 1767226737}
+  Battery: {fileID: 834119475}
+  Instructions: {fileID: 691860589}
 --- !u!1 &750205334
 GameObject:
   m_ObjectHideFlags: 0
@@ -33083,6 +33080,46 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.0556815, y: 3.0521913, z: 7.096422}
   m_Center: {x: 0.00008749962, y: 1.5258133, z: 0.020901084}
+--- !u!21 &1515907457
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hidden/DarkBringerRefined_1_2
+  m_Shader: {fileID: 4800000, guid: 99d80d0fdb7c6724c89e77d81bbc026a, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BayerTex:
+        m_Texture: {fileID: 2800000, guid: eac7505667530464e91debe0b4a8492b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Lut2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats: []
+    m_Colors: []
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &1526597727
 GameObject:
   m_ObjectHideFlags: 0
@@ -41536,18 +41573,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GeneratorText: {fileID: 1316656096}
---- !u!114 &1920752355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920752343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049a13f5fb235894ba90c6c5b1f103de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   player: {fileID: 2093472464}
   cinematicCamera: {fileID: 1551013610}
   endingPanel: {fileID: 120005163}
@@ -41559,7 +41584,7 @@ MonoBehaviour:
     do you like what you see? Is this the future you want? Coral reefs are the natural
     protectors from the waves; if they die, the ocean ecosystem dies too. Save the
     planet you live in.'
-  typingSpeed: 0.05
+  typingSpeed: 0.02
   mainMenuSceneName: MainMenuScene
 --- !u!1 &1935487748
 GameObject:

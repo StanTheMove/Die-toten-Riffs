@@ -24,7 +24,7 @@ public class Ending : MonoBehaviour, Interactable
         StartCoroutine(PlayEnding());
     }
 
-    private IEnumerator PlayEnding()
+    public IEnumerator PlayEnding()
     {
         if (player != null) player.SetActive(false);
         if (cinematicCamera != null) cinematicCamera.gameObject.SetActive(true);

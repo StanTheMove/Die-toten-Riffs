@@ -76,12 +76,4 @@ public class HealthScript : MonoBehaviour, IDamageable
         );
         _camera.localPosition = originalPos;
     }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            TakeDamage(5f);
-        }
-    }
 }
