@@ -16,11 +16,20 @@ public class GeneratorScript : MonoBehaviour, Interactable
     public void Interact()
     {
         if (InventoryScript.InstructionForGenerator < 1)
+        {
             ShowText("You need an instruction for this generator.", GeneratorText);
+            Debug.Log("GenInstr");
+        }
         else if (InventoryScript.Gas < 1)
+        { 
             ShowText("This generator needs a battery.", GeneratorText);
+            Debug.Log("GenBatt");
+        }
         else if (InventoryScript.AliveCoral < 1)
+        {
             ShowText("You need a sample of an alive coral.", GeneratorText);
+            Debug.Log("GenCora");
+        }
         else
         {
             ShowText("Success!", GeneratorText);
