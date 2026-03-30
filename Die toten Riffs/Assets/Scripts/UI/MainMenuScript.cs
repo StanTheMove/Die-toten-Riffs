@@ -8,7 +8,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("TotenRiffs");
     }
 
     public void QuitGame()
