@@ -9265,6 +9265,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2726124506138417499, guid: 20e6ea6a086cf6d4c8b703a7ed1fd96d, type: 3}
+      propertyPath: DamageSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c74d930423e3d64fb19a668fc524560, type: 3}
     - target: {fileID: 2928367766660637302, guid: 20e6ea6a086cf6d4c8b703a7ed1fd96d, type: 3}
       propertyPath: FlashlightOnSFX
       value: 
