@@ -34,7 +34,21 @@ public class MovementScript : MonoBehaviour
 
     void Update()
     {
-        bool isCrouching = Input.GetKey(KeyCode.LeftControl) && canMove;
+        bool wantsToCrouch = Input.GetKey(KeyCode.LeftControl) && canMove;
+        bool isCrouching = wantsToCrouch;
+
+        if (!wantsToCrouch)
+        {
+            Vector3 rayOrigin = transform.position + (Vector3.up * (crouchHeight / 2f));
+            float distanceToStand = (defaultHeight - crouchHeight);
+
+            if (Physics.SphereCast(rayOrigin, characterController.radius * 0.8f, Vector3.up, 
+                    out RaycastHit hit, distanceToStand))
+            {
+                isCrouching = true;
+            }
+        }
+        
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isCrouching;
 
         float targetHeight = isCrouching ? crouchHeight : defaultHeight;
