@@ -37,7 +37,7 @@ public class MovementScript : MonoBehaviour
         bool wantsToCrouch = Input.GetKey(KeyCode.LeftControl) && canMove;
         bool isCrouching = wantsToCrouch;
 
-        if (!wantsToCrouch)
+        if (!wantsToCrouch && characterController.height < defaultHeight - 0.1f)
         {
             Vector3 rayOrigin = transform.position + (Vector3.up * (crouchHeight / 2f));
             float distanceToStand = (defaultHeight - crouchHeight);
@@ -50,12 +50,11 @@ public class MovementScript : MonoBehaviour
         }
         
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isCrouching;
+        float speed = isCrouching ? crouchSpeed : (isRunning ? runSpeed : walkSpeed);
 
         float targetHeight = isCrouching ? crouchHeight : defaultHeight;
         characterController.height = Mathf.Lerp(characterController.height, targetHeight, 10f * Time.deltaTime);
-
-        float speed = isCrouching ? crouchSpeed : (isRunning ? runSpeed : walkSpeed);
-
+        
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         Vector3 targetVelocity = canMove
@@ -68,7 +67,7 @@ public class MovementScript : MonoBehaviour
         if (characterController.isGrounded)
         {
             if (verticalVelocity < 0f) verticalVelocity = -2f;
-            if (Input.GetButtonDown("Jump") && canMove)
+            if (Input.GetButtonDown("Jump") && canMove && !isCrouching)
                 verticalVelocity = jumpPower;
         }
         verticalVelocity -= gravityScale * Time.deltaTime;
